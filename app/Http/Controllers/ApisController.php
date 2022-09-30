@@ -13,6 +13,7 @@ class ApisController extends Controller
 
         $small_letter = 97;
         $capital_letter = 65;
+        $number_asci = 48;
         $length = strlen($string);
 
         for($j=0; $j<26; $j++) {
@@ -29,12 +30,25 @@ class ApisController extends Controller
             $small_letter +=1;
             $capital_letter+=1;
             $lower = "";
-            $capital = "";
+            $capital = ""; 
         }
         
+        
+        for($k=0; $k<10;$k++) {
+            for($z=0; $z<$length; $z++) {
+                $asci = ord($string[$z]);
+                if($asci == $number_asci) {
+                    $sorted .= $string[$z];
+                }
+            }
+            $number_asci +=1;
+        }
 
         return response()->json([
             $string => $sorted
         ]);
-    } 
-}
+    }
+} 
+
+        
+     
