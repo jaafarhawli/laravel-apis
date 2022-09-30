@@ -84,6 +84,40 @@ class ApisController extends Controller
             $num => $array
         ]);
     }
+
+    function numToBinary($string) {
+        
+        $length = strlen($string);
+        $counter = 0;
+        $number = "";
+        $int = 0;
+        $outputString = "";
+        $isNumber = false;
+
+        while($counter<$length) {
+            $asci = ord($string[$counter]);
+            if($asci>=48 && $asci<=57) {
+                while($asci>=48 && $asci<=57) {
+                    $number.= $string[$counter];
+                    $counter++;
+                    $asci = ord($string[$counter]);
+                }
+                $binary = decbin($number);
+                $outputString.=$binary;
+                $isNumber = true;
+                $number = "";
+            }
+            if($isNumber == false) {
+                $outputString.= $string[$counter];
+                $counter++;
+            }
+            else $isNumber=false;
+        }
+
+        return response()->json([
+            $string => $outputString
+        ]);
+    }
 } 
 
         
