@@ -85,6 +85,7 @@ class ApisController extends Controller
         ]);
     }
 
+    // Num to binary function: Transforms any number inside a string into it's binary form
     function numToBinary($string) {
         
         $length = strlen($string);
@@ -94,19 +95,24 @@ class ApisController extends Controller
         $outputString = "";
         $isNumber = false;
 
+        // Loops over the string
         while($counter<$length) {
             $asci = ord($string[$counter]);
+            // If a number is found, find all the following numbers and transform the whole final number into binary and add it to the output string
             if($asci>=48 && $asci<=57) {
+                // Get the whole number
                 while($asci>=48 && $asci<=57) {
                     $number.= $string[$counter];
                     $counter++;
                     $asci = ord($string[$counter]);
                 }
+                // Tramsform the number into binary
                 $binary = decbin($number);
                 $outputString.=$binary;
                 $isNumber = true;
                 $number = "";
             }
+            // If the character is'nt a number
             if($isNumber == false) {
                 $outputString.= $string[$counter];
                 $counter++;
