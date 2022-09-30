@@ -36,8 +36,8 @@ class ApisController extends Controller
                 }
             }
             $sorted .= $lower.$capital;
-            $small_letter +=1;
-            $capital_letter+=1;
+            $small_letter++;
+            $capital_letter++;
             $lower = "";
             $capital = ""; 
         }
@@ -50,7 +50,7 @@ class ApisController extends Controller
                     $sorted .= $string[$z];
                 }
             }
-            $number_asci +=1;
+            $number_asci++;
         }
 
         return response()->json([
