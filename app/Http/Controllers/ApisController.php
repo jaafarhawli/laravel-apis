@@ -125,6 +125,7 @@ class ApisController extends Controller
         ]);
     }
 
+    // Prefix function: Evaluates the prefix notation expression of the given string for operators +,*
     function prefix($prefix) {
 
         $operation = $prefix[0];
@@ -134,11 +135,14 @@ class ApisController extends Controller
         $result = 0;
         $number = "";
 
+        // Case of adding operation
         if($operation=="+") {
-            
+            // Loop over the prefix string
             while($counter<$length) {
                 $prefixChar = $prefix[$counter];
+                // When there's no space, find the number
                 if($prefixChar!= " ") {
+                    // If the number is negative
                     if($prefixChar=="-") {
                         $counter++;
                         $prefixChar=$prefix[$counter];
@@ -147,6 +151,7 @@ class ApisController extends Controller
                             $prefixChar = $prefix[$counter];
                             $number .= $prefixChar;
                             $counter++;
+                            // If the number is the last character in the string
                             if($counter>=$length) {
                                 $result += $number;
                                 return response()->json([
@@ -155,6 +160,7 @@ class ApisController extends Controller
                             }
                         }
                     }
+                    // If the number is positive
                     else {
                         while($prefixChar!=" ") {
                             $prefixChar = $prefix[$counter];
@@ -172,12 +178,14 @@ class ApisController extends Controller
                     $result += $number;
                     $number = "";
                 }
+                // If there is a space, skip to the next character
                 else {
                     $counter++;
                 }                
             }
         }
 
+        // Case of multiply operation 
         if($operation=="*") {
             
             $result = 1;
@@ -221,10 +229,10 @@ class ApisController extends Controller
                 }                
             }
         }
-
+        // Case of incorrect form (No + or * operator in the beginning of the string or there are other characters than integers inside the prefix string)
         return response()->json([
-            $prefix => $result
-        ]);   
+            $prefix => "Incorrect form"
+        ]);
     }
 } 
 
