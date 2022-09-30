@@ -159,6 +159,32 @@ class ApisController extends Controller
             }
         }
 
+        if($operation=="*") {
+            
+            $result = 1;
+            while($counter<$length) {
+                $prefixChar = $prefix[$counter];
+                if($prefixChar!= " ") {
+                    while($prefixChar!=" ") {
+                        $prefixChar = $prefix[$counter];
+                        $number .= $prefixChar;
+                        $counter++;
+                        if($counter>=$length) {
+                            $result *= $number;
+                            return response()->json([
+                                $prefix => $result
+                            ]);  
+                        }
+                    }
+                    $result *= $number;
+                    $number = "";
+                }
+                else {
+                    $counter++;
+                }                
+            }
+        }
+
         return response()->json([
             $prefix => $result
         ]);   
