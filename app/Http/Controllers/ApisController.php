@@ -57,6 +57,29 @@ class ApisController extends Controller
             $string => $sorted
         ]);
     }
+
+    function numToArray($num) {
+        
+        $array = [];
+        $digit = $num;
+        $order = 1;
+
+        while($digit>9) {
+            $lastDigit = $digit%10;
+            $digit-=$lastDigit;
+            $lastDigit*=$order;
+            array_push($array, $lastDigit);
+            $order*=10;
+            $digit/=10;
+        }
+
+        array_push($array, $digit*$order);
+        $array=array_reverse($array);
+
+        return response()->json([
+            $num => $array
+        ]);
+    }
 } 
 
         
