@@ -124,6 +124,45 @@ class ApisController extends Controller
             $string => $outputString
         ]);
     }
+
+    function prefix($prefix) {
+
+        $operation = $prefix[0];
+        $length = strlen($prefix);
+        $prefixChar = $prefix[2];
+        $counter = 2;
+        $result = 0;
+        $number = "";
+
+        if($operation=="+") {
+            
+            while($counter<$length) {
+                $prefixChar = $prefix[$counter];
+                if($prefixChar!= " ") {
+                    while($prefixChar!=" ") {
+                        $prefixChar = $prefix[$counter];
+                        $number .= $prefixChar;
+                        $counter++;
+                        if($counter>=$length) {
+                            $result += $number;
+                            return response()->json([
+                                $prefix => $result
+                            ]);  
+                        }
+                    }
+                    $result += $number;
+                    $number = "";
+                }
+                else {
+                    $counter++;
+                }                
+            }
+        }
+
+        return response()->json([
+            $prefix => $result
+        ]);   
+    }
 } 
 
         

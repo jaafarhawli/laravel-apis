@@ -10,6 +10,8 @@ Route::get("/num_to_array/{num?}", [ApisController::class, 'numToArray']);
 
 Route::get("/num_to_binary/{string?}", [ApisController::class, 'numToBinary']);
 
+Route::get("/prefix/{prefix?}", [ApisController::class, 'prefix']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
