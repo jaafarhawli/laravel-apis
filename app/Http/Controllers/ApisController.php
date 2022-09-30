@@ -58,12 +58,14 @@ class ApisController extends Controller
         ]);
     }
 
+    // Num to array function: Transforms any number into an array containing it's digits
     function numToArray($num) {
         
         $array = [];
         $digit = $num;
         $order = 1;
 
+        // Adds each digit to the array 
         while($digit>9) {
             $lastDigit = $digit%10;
             $digit-=$lastDigit;
@@ -73,7 +75,9 @@ class ApisController extends Controller
             $digit/=10;
         }
 
+        // Push the first digit 
         array_push($array, $digit*$order);
+        // Reverse the array
         $array=array_reverse($array);
 
         return response()->json([
