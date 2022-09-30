@@ -139,17 +139,36 @@ class ApisController extends Controller
             while($counter<$length) {
                 $prefixChar = $prefix[$counter];
                 if($prefixChar!= " ") {
-                    while($prefixChar!=" ") {
-                        $prefixChar = $prefix[$counter];
-                        $number .= $prefixChar;
+                    if($prefixChar=="-") {
                         $counter++;
-                        if($counter>=$length) {
-                            $result += $number;
-                            return response()->json([
-                                $prefix => $result
-                            ]);  
+                        $prefixChar=$prefix[$counter];
+                        $number.="-";
+                        while($prefixChar!=" ") {
+                            $prefixChar = $prefix[$counter];
+                            $number .= $prefixChar;
+                            $counter++;
+                            if($counter>=$length) {
+                                $result += $number;
+                                return response()->json([
+                                    $prefix => $result
+                                ]);  
+                            }
                         }
                     }
+                    else {
+                        while($prefixChar!=" ") {
+                            $prefixChar = $prefix[$counter];
+                            $number .= $prefixChar;
+                            $counter++;
+                            if($counter>=$length) {
+                                $result += $number;
+                                return response()->json([
+                                    $prefix => $result
+                                ]);  
+                            }
+                        }
+                    }
+                    
                     $result += $number;
                     $number = "";
                 }
@@ -165,15 +184,33 @@ class ApisController extends Controller
             while($counter<$length) {
                 $prefixChar = $prefix[$counter];
                 if($prefixChar!= " ") {
-                    while($prefixChar!=" ") {
-                        $prefixChar = $prefix[$counter];
-                        $number .= $prefixChar;
+                    if($prefixChar=="-") {
                         $counter++;
-                        if($counter>=$length) {
-                            $result *= $number;
-                            return response()->json([
-                                $prefix => $result
-                            ]);  
+                        $prefixChar=$prefix[$counter];
+                        $number.="-";
+                        while($prefixChar!=" ") {
+                            $prefixChar = $prefix[$counter];
+                            $number .= $prefixChar;
+                            $counter++;
+                            if($counter>=$length) {
+                                $result *= $number;
+                                return response()->json([
+                                    $prefix => $result
+                                ]);  
+                            }
+                        }
+                    }
+                    else {
+                        while($prefixChar!=" ") {
+                            $prefixChar = $prefix[$counter];
+                            $number .= $prefixChar;
+                            $counter++;
+                            if($counter>=$length) {
+                                $result *= $number;
+                                return response()->json([
+                                    $prefix => $result
+                                ]);  
+                            }
                         }
                     }
                     $result *= $number;
